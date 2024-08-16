@@ -207,33 +207,67 @@ import React, { useState, useEffect, useMemo } from 'react';
 //useMemo Hook implementation ----------------------------------------------------------------
 
 
-function calculateFactorial(n) {
-  if(n<=1) {
-    return 1;
-  }
-  return n* calculateFactorial(n-1);
-}
+// function calculateFactorial(n) {
+//   if(n<=1) {
+//     return 1;
+//   }
+//   return n* calculateFactorial(n-1);
+// }
+
+// function App() {
+//   const [input, setInput] = useState(5);
+//   const [number, setNumber] = useState(5);
+
+//   const factorial = useMemo(() => {
+//     console.log("Calculating calculator....");
+//     return calculateFactorial(number);
+//   },[number]);
+
+//   return (
+//     <div>
+//       <h1>Factorial Calculator:</h1>
+
+//       <input type='number' value={input} onChange={(e) => setInput(Number(e.target.value))}></input>
+
+//       <button onClick={ () => setNumber(input)}> calculate factorial</button>
+
+//       <p>Factorial of a {number} is {factorial}</p>
+//     </div>
+//   )
+// }
+
+
 
 function App() {
-  const [input, setInput] = useState(5);
-  const [number, setNumber] = useState(5);
+  
+  const [counter, setCounter] = useState(0);
+  const [inputValue, setInputValue] = useState(1);
 
-  const factorial = useMemo(() => {
-    console.log("Calculating calculator....");
-    return calculateFactorial(number);
-  },[number]);
+  const count = useMemo(() => {
+    let count = 0;
+    for(let i=0; i<=Number(inputValue); i++) {
+      count = count + i;
+    }
+    return count;
+  }, [inputValue])
 
   return (
     <div>
-      <h1>Factorial Calculator:</h1>
+      <input type='number' onChange={(e) => {
+        setInputValue(e.target.value)
+      }} placeholder='find the sum from 1 to n' />
 
-      <input type='number' value={input} onChange={(e) => setInput(Number(e.target.value))}></input>
+      <br />
 
-      <button onClick={ () => setNumber(input)}> calculate factorial</button>
+      <p>Sum is {count}</p>
 
-      <p>Factorial of a {number} is {factorial}</p>
+      <br />
+
+      <button onClick={() => setCounter(counter+1)} > Counter {counter} </button>
+
     </div>
   )
 }
 
 export default App;
+
