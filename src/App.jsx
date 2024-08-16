@@ -1,5 +1,5 @@
 import './App.css'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 
 // Example for useState hook --------------------------------
@@ -203,9 +203,35 @@ import React, { useState, useEffect } from 'react';
 // };
 
 
+
+//useMemo Hook implementation ----------------------------------------------------------------
+
+
+function calculateFactorial(n) {
+  if(n<=1) {
+    return 1;
+  }
+  return n* calculateFactorial(n-1);
+}
+
 function App() {
+  const [input, setInput] = useState(5);
+  const [number, setNumber] = useState(5);
+
+  const factorial = useMemo(() => {
+    console.log("Calculating calculator....");
+    return calculateFactorial(number);
+  },[number]);
+
   return (
     <div>
+      <h1>Factorial Calculator:</h1>
+
+      <input type='number' value={input} onChange={(e) => setInput(Number(e.target.value))}></input>
+
+      <button onClick={ () => setNumber(input)}> calculate factorial</button>
+
+      <p>Factorial of a {number} is {factorial}</p>
     </div>
   )
 }
